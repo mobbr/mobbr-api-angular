@@ -326,7 +326,7 @@ angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrConf
 angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.getApiUrl() + 'uris/:action', {}, {
-        info: {
+        payments: {
             method: 'GET',
             params : {
                 action: 'info'
