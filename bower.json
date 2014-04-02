@@ -1,0 +1,21 @@
+{
+  "name": "mobbr-api-angular",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mobbr/mobbr-api-angular",
+  "authors": [
+    "Han Dijk <info@handijk.nl>"
+  ],
+  "main": "mobbr-api-angular.min.js",
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.15",
+    "angular-resource": "1.2.15"
+  }
+}

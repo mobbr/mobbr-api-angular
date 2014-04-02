@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         concat: {
             options: {
                // separator: ';'
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n' +
+                banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("dd-mm-yyyy") %> */\n' +
                     '(function (angular, factory) {\n' +
                     '    if (typeof define === \'function\' && define.amd) {\n' +
                     '        define([\'angular\'], function(angular) {\n' +
@@ -55,6 +55,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-karma');
     grunt.registerTask('test', [ 'jshint' ]);
     grunt.registerTask('default', [ 'concat', 'jshint', 'uglify' ]);
 };
