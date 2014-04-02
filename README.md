@@ -3,8 +3,8 @@ mobbr-api-angular
 
 Mobbr API for AngularJS, uses ngResource.
 
-build from source
+Build from source
 =================
 
-npm install
-grunt
+- npm install
+- grunt
