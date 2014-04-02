@@ -76,9 +76,9 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
     });
 });
 
-angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'domains/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'domains/:action', {}, {
         info: {
             method: 'GET',
             params : {
@@ -88,9 +88,9 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrApi)
     });
 });
 
-angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'invoices/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'invoices/:action', {}, {
         requestable: {
             method: 'GET',
             params : {
@@ -142,9 +142,9 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrApi
     });
 });
 
-angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'payments/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'payments/:action', {}, {
         info: {
             method: 'GET',
             params : {
@@ -214,9 +214,9 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrApi
     });
 });
 
-angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'persons/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'persons/:action', {}, {
         url: {
             method: 'GET',
             params : {
@@ -269,9 +269,9 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrApi)
 });
 
 
-angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'referrers/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'referrers/:action', {}, {
         domain: {
             method: 'GET',
             params : {
@@ -287,9 +287,9 @@ angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrAp
     });
 });
 
-angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'script/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'script/:action', {}, {
         validate: {
             method: 'GET',
             params : {
@@ -299,9 +299,9 @@ angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrApi)
     });
 });
 
-angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'uris/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'uris/:action', {}, {
         domain: {
             method: 'GET',
             params : {
@@ -347,9 +347,9 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrApi) {
     });
 });
 
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'user/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'user/:action', {}, {
         ping: {
             method: 'GET',
             params : {
@@ -431,9 +431,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrApi) {
     });
 });
 
-angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'xpayments/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'xpayments/:action', {}, {
         info: {
             method: 'GET',
             params : {
