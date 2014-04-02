@@ -76,6 +76,30 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
     });
 });
 
+angular.module('mobbrApi').factory('MobbrBalance', function ($resource, mobbrConfig) {
+
+    return $resource(mobbrConfig.getApiUrl() + 'balances/:action', {}, {
+        user: {
+            method: 'GET',
+            params : {
+                action: 'user'
+            }
+        },
+        uri: {
+            method: 'GET',
+            params : {
+                action: 'uri'
+            }
+        },
+        domain: {
+            method: 'GET',
+            params : {
+                action: 'domain'
+            }
+        }
+    });
+});
+
 angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.getApiUrl() + 'domains/:action', {}, {
