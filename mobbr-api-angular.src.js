@@ -329,7 +329,7 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
         payments: {
             method: 'GET',
             params : {
-                action: 'info'
+                action: 'payments'
             }
         },
         domain: {
