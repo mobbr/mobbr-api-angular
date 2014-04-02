@@ -1,6 +1,6 @@
-var mobbrApi = angular.module('mobbrApi', [ 'ngResource' ]).factory('mobbrConfig', function () {
+var mobbrApi = angular.module('mobbrApi', [ 'ngResource' ]).factory('mobbrConfig', function (apiUrl) {
 
-    var apiUrl = 'https://api.mobbr.com/api_v1/';
+    apiUrl += '/api_v1/';
 
     return {
         setApiUrl: function (url) {
