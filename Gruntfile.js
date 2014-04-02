@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                     '));'
             },
             dist: {
-                src: [ 'src/**/*.js' ],
+                src: [ 'src/mobbr-config.js', 'src/**/!(mobbr-config).js' ],
                 dest: '<%= pkg.name %>.src.js'
             }
         },
