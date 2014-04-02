@@ -1,6 +1,6 @@
-angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'script/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'script/:action', {}, {
         validate: {
             method: 'GET',
             params : {

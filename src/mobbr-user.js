@@ -1,6 +1,6 @@
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'user/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'user/:action', {}, {
         ping: {
             method: 'GET',
             params : {

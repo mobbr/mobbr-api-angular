@@ -1,6 +1,6 @@
-angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'persons/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'persons/:action', {}, {
         url: {
             method: 'GET',
             params : {

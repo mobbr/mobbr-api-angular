@@ -1,6 +1,6 @@
-angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrApi) {
+angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrApi.getApiUrl() + 'referrers/:action', {}, {
+    return $resource(mobbrConfig.getApiUrl() + 'referrers/:action', {}, {
         domain: {
             method: 'GET',
             params : {
