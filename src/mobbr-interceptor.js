@@ -6,9 +6,8 @@ angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, mobbrConfig
 
     return {
         request: function (config) {
-            if (isMobbrApi(config.url) && mobbrConfig.token) {
-                config.withCredentials = true;
-                config.headers.Authorization = 'Basic ' + $window.btoa(':' + mobbrConfig.token);
+            if (isMobbrApi(config.url) && $rootScope.$mobbrStorage.token) {
+                config.headers.Authorization = 'Basic ' + $window.btoa(':' + $rootScope.$mobbrStorage.token);
             }
             return config;
         },

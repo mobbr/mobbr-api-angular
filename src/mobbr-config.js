@@ -11,8 +11,8 @@ angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig',
                 $rootScope.$mobbrStorage.user = user;
             },
             unsetUser: function () {
-                $rootScope.$mobbrStorage.token = undefined;
-                $rootScope.$mobbrStorage.user = undefined;
+                delete $rootScope.$mobbrStorage.token;
+                delete $rootScope.$mobbrStorage.user;
             },
             url: apiUrl + '/api_v1/',
             messages: []

@@ -22,8 +22,8 @@ angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig',
                 $rootScope.$mobbrStorage.user = user;
             },
             unsetUser: function () {
-                $rootScope.$mobbrStorage.token = undefined;
-                $rootScope.$mobbrStorage.user = undefined;
+                delete $rootScope.$mobbrStorage.token;
+                delete $rootScope.$mobbrStorage.user;
             },
             url: apiUrl + '/api_v1/',
             messages: []
@@ -140,9 +140,8 @@ angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, mobbrConfig
 
     return {
         request: function (config) {
-            if (isMobbrApi(config.url) && mobbrConfig.token) {
-                config.withCredentials = true;
-                config.headers.Authorization = 'Basic ' + $window.btoa(':' + mobbrConfig.token);
+            if (isMobbrApi(config.url) && $rootScope.$mobbrStorage.token) {
+                config.headers.Authorization = 'Basic ' + $window.btoa(':' + $rootScope.$mobbrStorage.token);
             }
             return config;
         },
@@ -434,12 +433,16 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
 angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
     function setUser(response) {
-        mobbrConfig.setUser(response.result);
+        if (response.status === 200 || response.status === 201) {
+            mobbrConfig.setUser(response.data.result);
+        }
         return response;
     }
 
     function unsetUser(response) {
-        mobbrConfig.unsetUser();
+        if (response.status === 200 || response.status === 201) {
+            mobbrConfig.unsetUser();
+        }
         return response;
     }
 

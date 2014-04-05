@@ -1,12 +1,16 @@
 angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
     function setUser(response) {
-        mobbrConfig.setUser(response.result);
+        if (response.status === 200 || response.status === 201) {
+            mobbrConfig.setUser(response.data.result);
+        }
         return response;
     }
 
     function unsetUser(response) {
-        mobbrConfig.unsetUser();
+        if (response.status === 200 || response.status === 201) {
+            mobbrConfig.unsetUser();
+        }
         return response;
     }
 
