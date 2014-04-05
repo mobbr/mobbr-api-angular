@@ -1,4 +1,4 @@
-angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig', function ($httpProvider, $localStorage, $rootScope, apiUrl) {
+angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig', function ($localStorage, $rootScope, apiUrl) {
 
     var user,
         token,
