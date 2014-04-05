@@ -19,12 +19,11 @@ angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig',
         };
 
     function emit() {
-        $rootScope.$broadcast('mobbrApi:authenticate', $rootScope.$mobbrStorage.user);
+        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
     }
 
     $rootScope.$mobbrStorage = $localStorage;
     $rootScope.$watch('$mobbrStorage.token', emit);
-    $rootScope.$watch('$mobbrStorage.user', emit, true);
 
     return mobbrConfig;
 
