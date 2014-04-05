@@ -132,7 +132,7 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
     });
 });
 
-angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, $rootScope, mobbrConfig) {
+angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, $rootScope, $window, mobbrConfig) {
 
     function isMobbrApi(url) {
         return url.indexOf(mobbrConfig.url) === 0;
