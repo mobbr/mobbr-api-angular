@@ -1,22 +1,56 @@
 angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'user/:action', {}, {
-        ping: {
-            method: 'GET',
+    function setUser(response) {
+        mobbrConfig.setUser(response.result);
+        return response;
+    }
+
+    function unsetUser(response) {
+        mobbrConfig.unsetUser();
+        return response;
+    }
+
+    return $resource(mobbrConfig.url + 'user/:action', {}, {
+        passwordLogin: {
+            method: 'PUT',
             params : {
-                action: 'ping'
+                action: 'password_login'
+            },
+            interceptor: {
+                response: setUser
+            }
+        },
+        linkLogin: {
+            method: 'PUT',
+            params : {
+                action: 'link_login'
+            },
+            interceptor: {
+                response: setUser
+            }
+        },
+        updateUser: {
+            method: 'POST',
+            params : {
+                action: 'update_user'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         logout: {
             method: 'DELETE',
             params : {
                 action: 'logout'
+            },
+            interceptor: {
+                response: unsetUser
             }
         },
-        passwordLogin: {
-            method: 'PUT',
+        ping: {
+            method: 'GET',
             params : {
-                action: 'password_login'
+                action: 'ping'
             }
         },
         sendLoginLink: {
@@ -43,22 +77,10 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'confirm_email'
             }
         },
-        linkLogin: {
-            method: 'PUT',
-            params : {
-                action: 'link_login'
-            }
-        },
         updatePassword: {
             method: 'POST',
             params : {
                 action: 'update_password'
-            }
-        },
-        updateUser: {
-            method: 'POST',
-            params : {
-                action: 'update_user'
             }
         },
         uploadIdentityProof: {

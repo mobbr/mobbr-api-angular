@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 02-04-2014 */
+/*! mobbr-api-angular 0.0.1 05-04-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -9,22 +9,40 @@
     }}(angular || null, function (angular) {
         'use strict';
 
-var mobbrApi = angular.module('mobbrApi', [ 'ngResource' ]).factory('mobbrConfig', function (apiUrl) {
+angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig', function ($httpProvider, $localStorage, $rootScope, apiUrl) {
 
-    apiUrl += '/api_v1/';
+    var user,
+        token,
+        mobbrConfig = {
+            setUser: function (user) {
+                if (user.token) {
+                    $rootScope.$mobbrStorage.token = user.token;
+                    delete user.token;
+                }
+                $rootScope.$mobbrStorage.user = user;
+            },
+            unsetUser: function () {
+                $rootScope.$mobbrStorage.token = undefined;
+                $rootScope.$mobbrStorage.user = undefined;
+            },
+            url: apiUrl + '/api_v1/',
+            messages: []
+        };
 
-    return {
-        setApiUrl: function (url) {
-            apiUrl = url;
-        },
-        getApiUrl: function () {
-            return apiUrl;
-        }
-    };
+    function emit() {
+        $rootScope.$broadcast('mobbrApi:authenticate', $rootScope.$mobbrStorage.user);
+    }
+
+    $httpProvider.interceptors.push('mobbrInterceptor');
+    $rootScope.$mobbrStorage = $localStorage;
+    $rootScope.$watch('$mobbrStorage.token', emit);
+    $rootScope.$watch('$mobbrStorage.user', emit, true);
+
+    return mobbrConfig;
 });
 angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'api/:action', {}, {
+    return $resource(mobbrConfig.url + 'api/:action', {}, {
         languages: {
             method: 'GET',
             params : {
@@ -78,7 +96,7 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
 
 angular.module('mobbrApi').factory('MobbrBalance', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'balances/:action', {}, {
+    return $resource(mobbrConfig.url + 'balances/:action', {}, {
         user: {
             method: 'GET',
             params : {
@@ -102,7 +120,7 @@ angular.module('mobbrApi').factory('MobbrBalance', function ($resource, mobbrCon
 
 angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'domains/:action', {}, {
+    return $resource(mobbrConfig.url + 'domains/:action', {}, {
         info: {
             method: 'GET',
             params : {
@@ -112,9 +130,43 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
     });
 });
 
+angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, mobbrConfig) {
+
+    function isMobbrApi(url) {
+        return url.indexOf(mobbrConfig.url) === 0;
+    }
+
+    return {
+        request: function (config) {
+            if (isMobbrApi(config.url) && mobbrConfig.token) {
+                config.withCredentials = true;
+                config.headers.Authorization = 'Basic ' + $window.btoa(':' + mobbrConfig.token);
+            }
+            return config;
+        },
+        response: function (response) {
+            if (isMobbrApi(response.config.url) && response.data.message) {
+                mobbrConfig.messages.push({ type: 'info', message: response.data.message });
+            }
+            return response;
+        },
+        responseError: function (rejection) {
+            if (isMobbrApi(rejection.config.url)) {
+                if (rejection.status === 401) {
+                    mobbrConfig.unsetUser();
+                }
+                if (rejection.data.message) {
+                    mobbrConfig.messages.push({ type: 'error', message: rejection.data.message });
+                }
+            }
+            return rejection;
+        }
+    };
+});
+
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'invoices/:action', {}, {
+    return $resource(mobbrConfig.url + 'invoices/:action', {}, {
         requestable: {
             method: 'GET',
             params : {
@@ -168,7 +220,7 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrCon
 
 angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'payments/:action', {}, {
+    return $resource(mobbrConfig.url + 'payments/:action', {}, {
         info: {
             method: 'GET',
             params : {
@@ -240,7 +292,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
 
 angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'persons/:action', {}, {
+    return $resource(mobbrConfig.url + 'persons/:action', {}, {
         url: {
             method: 'GET',
             params : {
@@ -295,7 +347,7 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
 
 angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'referrers/:action', {}, {
+    return $resource(mobbrConfig.url + 'referrers/:action', {}, {
         domain: {
             method: 'GET',
             params : {
@@ -313,7 +365,7 @@ angular.module('mobbrApi').factory('MobbrReferrer', function ($resource, mobbrCo
 
 angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'script/:action', {}, {
+    return $resource(mobbrConfig.url + 'script/:action', {}, {
         validate: {
             method: 'GET',
             params : {
@@ -325,7 +377,7 @@ angular.module('mobbrApi').factory('MobbrScript', function ($resource, mobbrConf
 
 angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'uris/:action', {}, {
+    return $resource(mobbrConfig.url + 'uris/:action', {}, {
         payments: {
             method: 'GET',
             params : {
@@ -379,23 +431,57 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
 
 angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'user/:action', {}, {
-        ping: {
-            method: 'GET',
+    function setUser(response) {
+        mobbrConfig.setUser(response.result);
+        return response;
+    }
+
+    function unsetUser(response) {
+        mobbrConfig.unsetUser();
+        return response;
+    }
+
+    return $resource(mobbrConfig.url + 'user/:action', {}, {
+        passwordLogin: {
+            method: 'PUT',
             params : {
-                action: 'ping'
+                action: 'password_login'
+            },
+            interceptor: {
+                response: setUser
+            }
+        },
+        linkLogin: {
+            method: 'PUT',
+            params : {
+                action: 'link_login'
+            },
+            interceptor: {
+                response: setUser
+            }
+        },
+        updateUser: {
+            method: 'POST',
+            params : {
+                action: 'update_user'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         logout: {
             method: 'DELETE',
             params : {
                 action: 'logout'
+            },
+            interceptor: {
+                response: unsetUser
             }
         },
-        passwordLogin: {
-            method: 'PUT',
+        ping: {
+            method: 'GET',
             params : {
-                action: 'password_login'
+                action: 'ping'
             }
         },
         sendLoginLink: {
@@ -422,22 +508,10 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'confirm_email'
             }
         },
-        linkLogin: {
-            method: 'PUT',
-            params : {
-                action: 'link_login'
-            }
-        },
         updatePassword: {
             method: 'POST',
             params : {
                 action: 'update_password'
-            }
-        },
-        updateUser: {
-            method: 'POST',
-            params : {
-                action: 'update_user'
             }
         },
         uploadIdentityProof: {
@@ -463,7 +537,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
 
 angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'xpayments/:action', {}, {
+    return $resource(mobbrConfig.url + 'xpayments/:action', {}, {
         info: {
             method: 'GET',
             params : {

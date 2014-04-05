@@ -1,6 +1,6 @@
 angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'api/:action', {}, {
+    return $resource(mobbrConfig.url + 'api/:action', {}, {
         languages: {
             method: 'GET',
             params : {

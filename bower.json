@@ -15,7 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.2.15",
-    "angular-resource": "1.2.15"
+    "angular": "~1.2.15",
+    "angular-resource": "~1.2.15",
+    "ngstorage": "~0.3.0"
   }
 }

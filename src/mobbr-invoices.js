@@ -1,6 +1,6 @@
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.getApiUrl() + 'invoices/:action', {}, {
+    return $resource(mobbrConfig.url + 'invoices/:action', {}, {
         requestable: {
             method: 'GET',
             params : {
