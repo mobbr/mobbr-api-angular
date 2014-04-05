@@ -33,12 +33,14 @@ angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig',
         $rootScope.$broadcast('mobbrApi:authenticate', $rootScope.$mobbrStorage.user);
     }
 
-    $httpProvider.interceptors.push('mobbrInterceptor');
     $rootScope.$mobbrStorage = $localStorage;
     $rootScope.$watch('$mobbrStorage.token', emit);
     $rootScope.$watch('$mobbrStorage.user', emit, true);
 
     return mobbrConfig;
+
+}).config(function ($httpProvider) {
+    $httpProvider.interceptors.push('mobbrInterceptor');
 });
 angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig) {
 
