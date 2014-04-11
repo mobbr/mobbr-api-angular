@@ -10,8 +10,11 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($inj
             return config;
         },
         response: function (response) {
-            MobbrUser = MobbrUser || $injector.get('MobbrUser');
-            console.log(response, MobbrUser);
+            if (mobbrConfig.isApiUrl(response.config.url) && (response.status === 200 || response.status === 201)) {
+                MobbrUser = MobbrUser || $injector.get('MobbrUser');
+                console.log(response, MobbrUser);
+            }
+            return response;
         },
         responseError: function (rejection) {
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 401) {
