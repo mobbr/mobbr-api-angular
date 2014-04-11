@@ -1,15 +1,15 @@
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSession) {
 
     function setUser(response) {
         if (response.status === 200 || response.status === 201) {
-            mobbrConfig.setUser(response.data.result);
+            mobbrSession.setUser(response.data.result);
         }
         return response;
     }
 
     function unsetUser(response) {
         if (response.status === 200 || response.status === 201) {
-            mobbrConfig.unsetUser();
+            mobbrSession.unsetUser();
         }
         return response;
     }

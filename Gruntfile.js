@@ -19,8 +19,12 @@ module.exports = function(grunt) {
                     '));'
             },
             dist: {
-                src: [ 'src/mobbr-config.js', 'src/**/!(mobbr-config).js' ],
-                dest: '<%= pkg.name %>.src.js'
+                files: {
+                    'mobbr-api.src.js': [ 'src/mobbr-config.js', 'src/api/*.js' ],
+                    'mobbr-api-msg.src.js': [ 'src/msg/mobbr-msg.js', 'src/msg/mobbr-msg-interceptor.js' ],
+                    'mobbr-api-session.src.js': [ 'src/session/mobbr-session.js', 'src/session/mobbr-session-interceptor.js' ],
+                    'mobbr-api-all.src.js':  ['mobbr-api.src.js', 'mobbr-api-msg.src.js', 'mobbr-api-session.src.js', 'mobbr-api-all.src.js' ]
+                }
             }
         },
         uglify: {
@@ -29,7 +33,10 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= pkg.name %>.min.js': [ '<%= concat.dist.dest %>' ]
+                    'mobbr-api.min.js': [ 'mobbr-api.src.js' ],
+                    'mobbr-api-msg.min.js': [ 'mobbr-api-msg.src.js' ],
+                    'mobbr-api-session.min.js': [ 'mobbr-api-session.src.js' ],
+                    'mobbr-api-all.min.js': [ 'mobbr-api.src.js', 'mobbr-api-msg.src.js', 'mobbr-api-session.src.js' ]
                 }
             }
         },

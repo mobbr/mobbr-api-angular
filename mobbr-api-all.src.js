@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 05-04-2014 */
+/*! mobbr-api-angular 0.0.1 11-04-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -9,37 +9,27 @@
     }}(angular || null, function (angular) {
         'use strict';
 
-angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig', function ($localStorage, $rootScope, apiUrl) {
+/*! mobbr-api-angular 0.0.1 11-04-2014 */
+(function (angular, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['angular'], function(angular) {
+            return factory(angular);
+        });
+    } else {
+        return factory(angular);
+    }}(angular || null, function (angular) {
+        'use strict';
 
-    var user,
-        token,
-        mobbrConfig = {
-            setUser: function (user) {
-                if (user.token) {
-                    $rootScope.$mobbrStorage.token = user.token;
-                    delete user.token;
-                }
-                $rootScope.$mobbrStorage.user = user;
-            },
-            unsetUser: function () {
-                delete $rootScope.$mobbrStorage.token;
-                delete $rootScope.$mobbrStorage.user;
-            },
-            url: apiUrl + '/api_v1/',
-            messages: []
-        };
+angular.module('mobbrApi', [ 'ngResource', 'ngStorage' ]).factory('mobbrConfig', function ($rootScope, apiUrl) {
 
-    function emit() {
-        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
-    }
+    var config = {
+        url: apiUrl + '/api_v1/',
+        isApiUrl: function (url) {
+            return url.indexOf(config.url) === 0;
+        }
+    };
 
-    $rootScope.$mobbrStorage = $localStorage;
-    $rootScope.$watch('$mobbrStorage.token', emit);
-
-    return mobbrConfig;
-
-}).config(function ($httpProvider) {
-    $httpProvider.interceptors.push('mobbrInterceptor');
+    return config;
 });
 angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig) {
 
@@ -129,39 +119,6 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
             }
         }
     });
-});
-
-angular.module('mobbrApi').factory('mobbrInterceptor', function ($q, $rootScope, $window, mobbrConfig) {
-
-    function isMobbrApi(url) {
-        return url.indexOf(mobbrConfig.url) === 0;
-    }
-
-    return {
-        request: function (config) {
-            if (isMobbrApi(config.url) && $rootScope.$mobbrStorage.token) {
-                config.headers.Authorization = 'Basic ' + $window.btoa(':' + $rootScope.$mobbrStorage.token);
-            }
-            return config;
-        },
-        response: function (response) {
-            if (isMobbrApi(response.config.url) && response.data.message) {
-                mobbrConfig.messages.push({ type: 'info', message: response.data.message });
-            }
-            return response;
-        },
-        responseError: function (rejection) {
-            if (isMobbrApi(rejection.config.url)) {
-                if (rejection.status === 401) {
-                    mobbrConfig.unsetUser();
-                }
-                if (rejection.data.message) {
-                    mobbrConfig.messages.push({ type: 'error', message: rejection.data.message });
-                }
-            }
-            return rejection;
-        }
-    };
 });
 
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
@@ -429,18 +386,18 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
     });
 });
 
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSession) {
 
     function setUser(response) {
         if (response.status === 200 || response.status === 201) {
-            mobbrConfig.setUser(response.data.result);
+            mobbrSession.setUser(response.data.result);
         }
         return response;
     }
 
     function unsetUser(response) {
         if (response.status === 200 || response.status === 201) {
-            mobbrConfig.unsetUser();
+            mobbrSession.unsetUser();
         }
         return response;
     }
@@ -581,4 +538,106 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
     });
 });
     }
+));
+/*! mobbr-api-angular 0.0.1 11-04-2014 */
+(function (angular, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['angular'], function(angular) {
+            return factory(angular);
+        });
+    } else {
+        return factory(angular);
+    }}(angular || null, function (angular) {
+        'use strict';
+
+angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
+
+    return {
+        messages: []
+    };
+
+}).config(function ($httpProvider) {
+    $httpProvider.interceptors.push('mobbrMsgInterceptor');
+});
+angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig, mobbrMsg) {
+
+    return {
+        response: function (response) {
+            if (mobbrConfig.isApiUrl(response.config.url) && response.data.message) {
+                mobbrMsg.messages.push({ msg: response.data.message });
+            }
+            return response;
+        },
+        responseError: function (rejection) {
+            if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
+                mobbrMsg.messages.push({ type: 'danger', message: rejection.data.message });
+            }
+            return rejection;
+        }
+    };
+});
+    }
+));
+/*! mobbr-api-angular 0.0.1 11-04-2014 */
+(function (angular, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['angular'], function(angular) {
+            return factory(angular);
+        });
+    } else {
+        return factory(angular);
+    }}(angular || null, function (angular) {
+        'use strict';
+
+angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function ($localStorage, $rootScope, $window) {
+
+    $rootScope.$mobbrStorage = $localStorage;
+    $rootScope.$watch('$mobbrStorage.token', function () {
+        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
+    });
+
+    return {
+        setUser: function (user) {
+            if (user.token) {
+                $rootScope.$mobbrStorage.token = user.token;
+                delete user.token;
+            }
+            $rootScope.$mobbrStorage.user = user;
+        },
+        unsetUser: function () {
+            delete $rootScope.$mobbrStorage.token;
+            delete $rootScope.$mobbrStorage.user;
+        },
+        isAuthorized: function () {
+            return $rootScope.$mobbrStorage.token && true || false;
+        },
+        getAuthorization: function () {
+            return 'Basic ' + $window.btoa(':' + $rootScope.$mobbrStorage.token);
+        }
+    }
+
+}).config(function ($httpProvider) {
+    $httpProvider.interceptors.push('mobbrSessionInterceptor');
+});
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, mobbrUser) {
+
+    console.log(mobbrUser);
+
+    return {
+        request: function (config) {
+            if (mobbrConfig.isApiUrl(config.url) && mobbrSession.isAuthorized()) {
+                config.headers.Authorization = mobbrSession.getAuthorization();
+            }
+            return config;
+        },
+        responseError: function (rejection) {
+            if (mobbrConfig.isApiUrl(rejection.config.url && rejection.status === 401)) {
+                mobbrSession.unsetUser();
+            }
+            return rejection;
+        }
+    };
+});
+    }
+));    }
 ));
