@@ -14,7 +14,7 @@ angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
     var msg = {
         messages: [],
         close: function (i) {
-            msg.splice(i, 1);
+            msg.messages.splice(i, 1);
         }
     };
 
