@@ -1,4 +1,4 @@
-angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
+angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function ($timeout) {
 
     var msg = {
         messages: [],
