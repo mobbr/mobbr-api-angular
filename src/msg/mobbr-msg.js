@@ -1,8 +1,13 @@
 angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
 
-    return {
-        messages: []
+    var msg = {
+        messages: [],
+        close: function (i) {
+            msg.splice(i, 1);
+        }
     };
+
+    return msg;
 
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrMsgInterceptor');

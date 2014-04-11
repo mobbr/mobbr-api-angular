@@ -11,9 +11,14 @@
 
 angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
 
-    return {
-        messages: []
+    var msg = {
+        messages: [],
+        close: function (i) {
+            msg.splice(i, 1);
+        }
     };
+
+    return msg;
 
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrMsgInterceptor');
@@ -23,14 +28,13 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig,
     return {
         response: function (response) {
             if (mobbrConfig.isApiUrl(response.config.url) && response.data.message) {
-                mobbrMsg.messages.push({ msg: response.data.message });
+                mobbrMsg.messages.push({ msg: response.data.message.text });
             }
             return response;
         },
         responseError: function (rejection) {
-            console.log(rejection);
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
-                mobbrMsg.messages.push({ type: 'danger', message: rejection.data.message });
+                mobbrMsg.messages.push({ type: 'danger', message: rejection.data.message.text });
             }
             return rejection;
         }
