@@ -39,7 +39,7 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrSessionInterceptor');
 });
-angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, mobbrUser) {
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, MobbrUser) {
 
     console.log(mobbrUser);
 
