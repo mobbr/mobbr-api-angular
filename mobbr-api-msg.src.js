@@ -13,6 +13,16 @@ angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function () {
 
     var msg = {
         messages: [],
+        add: function (message, timeout) {
+
+            msg.messages.push(message);
+
+            if (timeout !== false) {
+                $timeout(function(){
+                    msg.close(msg.messages.indexOf(message));
+                }, timeout || 5000);
+            }
+        },
         close: function (i) {
             msg.messages.splice(i, 1);
         }
@@ -28,13 +38,13 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig,
     return {
         response: function (response) {
             if (mobbrConfig.isApiUrl(response.config.url) && response.data.message) {
-                mobbrMsg.messages.push({ msg: response.data.message.text });
+                mobbrMsg.add({ msg: response.data.message.text });
             }
             return response;
         },
         responseError: function (rejection) {
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
-                mobbrMsg.messages.push({ type: 'danger', message: rejection.data.message.text });
+                mobbrMsg.add({ type: 'danger', message: rejection.data.message.text });
             }
             return rejection;
         }
