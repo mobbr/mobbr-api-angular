@@ -22,8 +22,7 @@ module.exports = function(grunt) {
                 files: {
                     'mobbr-api.src.js': [ 'src/mobbr-config.js', 'src/api/*.js' ],
                     'mobbr-api-msg.src.js': [ 'src/msg/mobbr-msg.js', 'src/msg/mobbr-msg-interceptor.js' ],
-                    'mobbr-api-session.src.js': [ 'src/session/mobbr-session.js', 'src/session/mobbr-session-interceptor.js' ],
-                    'mobbr-api-all.src.js':  ['mobbr-api.src.js', 'mobbr-api-msg.src.js', 'mobbr-api-session.src.js', 'mobbr-api-all.src.js' ]
+                    'mobbr-api-session.src.js': [ 'src/session/mobbr-session.js', 'src/session/mobbr-session-interceptor.js' ]
                 }
             }
         },
