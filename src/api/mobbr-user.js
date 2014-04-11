@@ -1,4 +1,4 @@
-angular.module('mobbrApi').factory('MobbrUser', function ($resource) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
 
     /*function setUser(response) {
         if (response.status === 200 || response.status === 201) {

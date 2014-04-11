@@ -1,4 +1,4 @@
-angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, mobbrUser) {
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, MobbrUser) {
 
     console.log(mobbrUser);
 
