@@ -50,7 +50,7 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobb
             return config;
         },
         responseError: function (rejection) {
-            if (mobbrConfig.isApiUrl(rejection.config.url && rejection.status === 401)) {
+            if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 401) {
                 mobbrSession.unsetUser();
             }
             return rejection;

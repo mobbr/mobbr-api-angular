@@ -28,6 +28,7 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig,
             return response;
         },
         responseError: function (rejection) {
+            console.log(rejection);
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
                 mobbrMsg.messages.push({ type: 'danger', message: rejection.data.message });
             }
