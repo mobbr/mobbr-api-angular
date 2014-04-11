@@ -39,12 +39,11 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrSessionInterceptor');
 });
-angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, MobbrUser) {
-
-    console.log(mobbrUser);
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession) {
 
     return {
         request: function (config) {
+            console.log(config);
             if (mobbrConfig.isApiUrl(config.url) && mobbrSession.isAuthorized()) {
                 config.headers.Authorization = mobbrSession.getAuthorization();
             }
