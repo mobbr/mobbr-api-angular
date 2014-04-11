@@ -375,9 +375,9 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
     });
 });
 
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSession) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource) {
 
-    function setUser(response) {
+    /*function setUser(response) {
         if (response.status === 200 || response.status === 201) {
             mobbrSession.setUser(response.data.result);
         }
@@ -389,7 +389,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSessio
             mobbrSession.unsetUser();
         }
         return response;
-    }
+    }*/
 
     return $resource(mobbrConfig.url + 'user/:action', {}, {
         passwordLogin: {
@@ -398,7 +398,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSessio
                 action: 'password_login'
             },
             interceptor: {
-                response: setUser
+                //response: setUser
             }
         },
         linkLogin: {
@@ -407,7 +407,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSessio
                 action: 'link_login'
             },
             interceptor: {
-                response: setUser
+                //response: setUser
             }
         },
         updateUser: {
@@ -416,7 +416,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSessio
                 action: 'update_user'
             },
             interceptor: {
-                response: setUser
+                //response: setUser
             }
         },
         logout: {
@@ -425,7 +425,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrSessio
                 action: 'logout'
             },
             interceptor: {
-                response: unsetUser
+                //response: unsetUser
             }
         },
         ping: {
