@@ -1,4 +1,6 @@
-angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobbrConfig, mobbrSession, MobbrUser) {
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($injector, mobbrConfig, mobbrSession) {
+
+    var MobbrUser;
 
     return {
         request: function (config) {
@@ -8,6 +10,7 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function (mobb
             return config;
         },
         response: function (response) {
+            MobbrUser = MobbrUser || $injector.get('MobbrUser');
             console.log(response, MobbrUser);
         },
         responseError: function (rejection) {
