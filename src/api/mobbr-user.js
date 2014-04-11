@@ -1,18 +1,26 @@
-angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig) {
+angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, mobbrConfig) {
 
-    /*function setUser(response) {
-        if (response.status === 200 || response.status === 201) {
+    var mobbrSession;
+
+    try {
+        mobbrSession = $injector.get('mobbrSession');
+    } catch(err) {
+        mobbrSession = undefined;
+    }
+
+    function setUser(response) {
+        if (mobbrSession && (response.status === 200 || response.status === 201)) {
             mobbrSession.setUser(response.data.result);
         }
         return response;
     }
 
     function unsetUser(response) {
-        if (response.status === 200 || response.status === 201) {
+        if (mobbrSession && (response.status === 200 || response.status === 201)) {
             mobbrSession.unsetUser();
         }
         return response;
-    }*/
+    }
 
     return $resource(mobbrConfig.url + 'user/:action', {}, {
         passwordLogin: {
@@ -21,7 +29,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'password_login'
             },
             interceptor: {
-                //response: setUser
+                response: setUser
             }
         },
         linkLogin: {
@@ -30,7 +38,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'link_login'
             },
             interceptor: {
-                //response: setUser
+                response: setUser
             }
         },
         updateUser: {
@@ -39,7 +47,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'update_user'
             },
             interceptor: {
-                //response: setUser
+                response: setUser
             }
         },
         logout: {
@@ -48,7 +56,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, mobbrConfig
                 action: 'logout'
             },
             interceptor: {
-                //response: unsetUser
+                response: unsetUser
             }
         },
         ping: {
