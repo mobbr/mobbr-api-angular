@@ -1,4 +1,4 @@
-angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($, mobbrConfig, mobbrMsg) {
+angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($q, mobbrConfig, mobbrMsg) {
 
     return {
         response: function (response) {

@@ -33,7 +33,7 @@ angular.module('mobbrMsg', [ 'mobbrApi' ]).factory('mobbrMsg', function ($timeou
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrMsgInterceptor');
 });
-angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($, mobbrConfig, mobbrMsg) {
+angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($q, mobbrConfig, mobbrMsg) {
 
     return {
         response: function (response) {
