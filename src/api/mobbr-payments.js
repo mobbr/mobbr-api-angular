@@ -19,10 +19,10 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
                 action: 'pledged'
             }
         },
-        pledges: {
+        unclaimed: {
             method: 'GET',
             params : {
-                action: 'pledges'
+                action: 'unclaimed'
             }
         },
         new: {
