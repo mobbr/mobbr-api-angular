@@ -1,4 +1,4 @@
-angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig, mobbrMsg) {
+angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($, mobbrConfig, mobbrMsg) {
 
     return {
         response: function (response) {
@@ -11,7 +11,7 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function (mobbrConfig,
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
                 mobbrMsg.add({ type: 'danger', message: rejection.data.message.text });
             }
-            return rejection;
+            return $q.reject(rejection);
         }
     };
 });

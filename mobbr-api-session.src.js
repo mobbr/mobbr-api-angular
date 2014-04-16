@@ -39,7 +39,7 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
 }).config(function ($httpProvider) {
     $httpProvider.interceptors.push('mobbrSessionInterceptor');
 });
-angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($injector, mobbrConfig, mobbrSession) {
+angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($q, $injector, mobbrConfig, mobbrSession) {
 
     return {
         request: function (config) {
@@ -52,7 +52,7 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($inj
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 401) {
                 mobbrSession.unsetUser();
             }
-            return rejection;
+            return $q.reject(rejection);
         }
     };
 });
