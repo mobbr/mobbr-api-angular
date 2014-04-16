@@ -185,12 +185,6 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
                 action: 'pledged'
             }
         },
-        unclaimed: {
-            method: 'GET',
-            params : {
-                action: 'unclaimed'
-            }
-        },
         new: {
             method: 'GET',
             params : {
