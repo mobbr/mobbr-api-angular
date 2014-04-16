@@ -9,7 +9,7 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($q, mobbrCon
         },
         responseError: function (rejection) {
             if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
-                mobbrMsg.add({ type: 'danger', message: rejection.data.message.text });
+                mobbrMsg.add({ type: 'danger', msg: rejection.data.message.text });
             }
             return $q.reject(rejection);
         }
