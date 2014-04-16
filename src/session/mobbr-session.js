@@ -1,7 +1,11 @@
 angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function ($localStorage, $rootScope, $window) {
 
+    var MobbrUser;
+
     $rootScope.$mobbrStorage = $localStorage;
     $rootScope.$watch('$mobbrStorage.token', function () {
+        MobbrUser = MobbrUser || $injector.get('MobbrUser');
+        MobbrUser.ping();
         $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
     });
 
