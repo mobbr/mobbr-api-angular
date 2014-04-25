@@ -3,10 +3,12 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
     var MobbrUser;
 
     $rootScope.$mobbrStorage = $localStorage;
-    $rootScope.$watch('$mobbrStorage.token', function () {
-        MobbrUser = MobbrUser || $injector.get('MobbrUser');
-        MobbrUser.ping();
-        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
+    $rootScope.$watch('$mobbrStorage.token', function (newValue, oldValue) {
+        if (newValue && newValue !== oldValue) {
+            MobbrUser = MobbrUser || $injector.get('MobbrUser');
+            MobbrUser.ping();
+            $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
+        }
     });
 
     return {

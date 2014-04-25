@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 17-04-2014 */
+/*! mobbr-api-angular 0.0.1 25-04-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -14,10 +14,12 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
     var MobbrUser;
 
     $rootScope.$mobbrStorage = $localStorage;
-    $rootScope.$watch('$mobbrStorage.token', function () {
-        MobbrUser = MobbrUser || $injector.get('MobbrUser');
-        MobbrUser.ping();
-        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
+    $rootScope.$watch('$mobbrStorage.token', function (newValue, oldValue) {
+        if (newValue && newValue !== oldValue) {
+            MobbrUser = MobbrUser || $injector.get('MobbrUser');
+            MobbrUser.ping();
+            $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
+        }
     });
 
     return {
@@ -53,7 +55,7 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($q, 
             return config;
         },
         responseError: function (rejection) {
-            if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 401) {
+            if (mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 403) {
                 mobbrSession.unsetUser();
             }
             return $q.reject(rejection);
