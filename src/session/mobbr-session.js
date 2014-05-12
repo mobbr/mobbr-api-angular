@@ -4,7 +4,7 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
 
     $rootScope.$mobbrStorage = $localStorage;
     $rootScope.$watch('$mobbrStorage.token', function (newValue, oldValue) {
-        if (newValue && newValue !== oldValue) {
+        if (newValue) {
             MobbrUser = MobbrUser || $injector.get('MobbrUser');
             MobbrUser.ping();
         }
