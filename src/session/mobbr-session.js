@@ -7,8 +7,8 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
         if (newValue && newValue !== oldValue) {
             MobbrUser = MobbrUser || $injector.get('MobbrUser');
             MobbrUser.ping();
-            $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
         }
+        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
     });
 
     return {

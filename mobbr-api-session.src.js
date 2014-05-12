@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 25-04-2014 */
+/*! mobbr-api-angular 0.0.1 12-05-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -18,8 +18,8 @@ angular.module('mobbrSession', [ 'mobbrApi' ]).factory('mobbrSession', function 
         if (newValue && newValue !== oldValue) {
             MobbrUser = MobbrUser || $injector.get('MobbrUser');
             MobbrUser.ping();
-            $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
         }
+        $rootScope.$broadcast('mobbrApi:authchange', $rootScope.$mobbrStorage.user);
     });
 
     return {
