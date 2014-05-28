@@ -506,7 +506,7 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
             }
         },
         deposit: {
-            method: 'GET',
+            method: 'POST',
             params : {
                 action: 'deposit'
             }
