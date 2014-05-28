@@ -99,6 +99,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'POST',
             params : {
                 action: 'upload_identity_proof'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         profileStatus: {

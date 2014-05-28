@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 12-05-2014 */
+/*! mobbr-api-angular 0.0.1 28-05-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -470,6 +470,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'POST',
             params : {
                 action: 'upload_identity_proof'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         profileStatus: {
@@ -502,16 +505,10 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
                 action: 'withdraw'
             }
         },
-        prepareDeposit: {
+        deposit: {
             method: 'GET',
             params : {
-                action: 'prepare_deposit'
-            }
-        },
-        confirmDeposit: {
-            method: 'PUT',
-            params : {
-                action: 'confirm_deposit'
+                action: 'deposit'
             }
         },
         supportedCurrencies: {
