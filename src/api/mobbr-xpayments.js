@@ -13,10 +13,16 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
                 action: 'withdraw'
             }
         },
-        deposit: {
+        prepareDeposit: {
             method: 'GET',
             params : {
-                action: 'deposit'
+                action: 'prepare_deposit'
+            }
+        },
+        confirmDeposit: {
+            method: 'PUT',
+            params : {
+                action: 'confirm_deposit'
             }
         },
         supportedCurrencies: {
