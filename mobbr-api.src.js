@@ -505,16 +505,10 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
                 action: 'withdraw'
             }
         },
-        prepareDeposit: {
+        deposit: {
             method: 'GET',
             params : {
-                action: 'prepare_deposit'
-            }
-        },
-        confirmDeposit: {
-            method: 'PUT',
-            params : {
-                action: 'confirm_deposit'
+                action: 'deposit'
             }
         },
         supportedCurrencies: {
