@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 28-05-2014 */
+/*! mobbr-api-angular 0.0.1 04-06-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {

@@ -7,22 +7,10 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
                 action: 'info'
             }
         },
-        historic: {
-            method: 'GET',
-            params : {
-                action: 'historic'
-            }
-        },
         pledged: {
             method: 'GET',
             params : {
                 action: 'pledged'
-            }
-        },
-        new: {
-            method: 'GET',
-            params : {
-                action: 'new'
             }
         },
         unpledge: {

@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 28-05-2014 */
+/*! mobbr-api-angular 0.0.1 04-06-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -173,22 +173,10 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
                 action: 'info'
             }
         },
-        historic: {
-            method: 'GET',
-            params : {
-                action: 'historic'
-            }
-        },
         pledged: {
             method: 'GET',
             params : {
                 action: 'pledged'
-            }
-        },
-        new: {
-            method: 'GET',
-            params : {
-                action: 'new'
             }
         },
         unpledge: {
