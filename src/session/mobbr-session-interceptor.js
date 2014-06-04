@@ -8,7 +8,7 @@ angular.module('mobbrSession').factory('mobbrSessionInterceptor', function ($q, 
             return config;
         },
         responseError: function (rejection) {
-            if (mobbrConfig.isApiUrl(rejection.url) && rejection.status === 403) {
+            if (rejection.config && mobbrConfig.isApiUrl(rejection.config.url) && rejection.status === 403) {
                 mobbrSession.unsetUser();
             }
             return $q.reject(rejection);
