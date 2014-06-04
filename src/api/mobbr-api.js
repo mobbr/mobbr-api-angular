@@ -48,6 +48,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             params : {
                 action: 'iso_timezones'
             }
+        },
+        kycIncomeRanges: {
+            method: 'GET',
+            params : {
+                action: 'kyc_incomeranges'
+            }
         }
     });
 });
