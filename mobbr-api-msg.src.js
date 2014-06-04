@@ -43,9 +43,15 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($q, mobbrCon
             return response;
         },
         responseError: function (rejection) {
-            if (mobbrConfig.isApiUrl(rejection.url) && rejection.data.message) {
+
+            if (rejection.config && mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
                 mobbrMsg.add({ type: 'danger', msg: rejection.data.message.text });
             }
+
+            if (!rejection.config) {
+                mobbrMsg.add({ type: 'danger', msg: rejection.message });
+            }
+
             return $q.reject(rejection);
         }
     };
