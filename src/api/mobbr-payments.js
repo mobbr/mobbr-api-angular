@@ -48,6 +48,12 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             params : {
                 action: 'domain'
             }
+        },
+        uri: {
+            method: 'GET',
+            params : {
+                action: 'uri'
+            }
         }
     });
 });

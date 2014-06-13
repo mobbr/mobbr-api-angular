@@ -1,12 +1,6 @@
 angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'uris/:action', {}, {
-        payments: {
-            method: 'GET',
-            params : {
-                action: 'payments'
-            }
-        },
         domain: {
             method: 'GET',
             params : {
