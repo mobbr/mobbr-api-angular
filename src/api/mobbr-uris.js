@@ -37,10 +37,10 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
                 action: 'earned'
             }
         },
-        person: {
+        persons: {
             method: 'GET',
             params : {
-                action: 'person'
+                action: 'persons'
             }
         }
     });
