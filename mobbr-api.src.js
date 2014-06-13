@@ -233,10 +233,10 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
 angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'persons/:action', {}, {
-        url: {
+        uri: {
             method: 'GET',
             params : {
-                action: 'url'
+                action: 'uri'
             }
         },
         domain: {
@@ -352,12 +352,6 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
             method: 'GET',
             params : {
                 action: 'earned'
-            }
-        },
-        persons: {
-            method: 'GET',
-            params : {
-                action: 'persons'
             }
         }
     });
