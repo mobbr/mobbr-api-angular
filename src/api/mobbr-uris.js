@@ -36,12 +36,6 @@ angular.module('mobbrApi').factory('MobbrUri', function ($resource, mobbrConfig)
             params : {
                 action: 'earned'
             }
-        },
-        person: {
-            method: 'GET',
-            params : {
-                action: 'person'
-            }
         }
     });
 });
