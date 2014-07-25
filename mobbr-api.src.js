@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 10-08-2014 */
+/*! mobbr-api-angular 0.0.1 25-07-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -75,6 +75,18 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             method: 'GET',
             params : {
                 action: 'kyc_incomeranges'
+            }
+        },
+        oauthProviders: {
+            method : 'GET',
+            params : {
+                action : 'oauth_providers'
+            }
+        },
+        api_connections : {
+            method : 'GET',
+            params : {
+                action : 'api_connections'
             }
         }
     });
@@ -175,55 +187,67 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
     return $resource(mobbrConfig.url + 'payments/:action', {}, {
         info: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'info'
             }
         },
         pledged: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'pledged'
             }
         },
         unpledge: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'unpledge'
             }
         },
         preview: {
-            method: 'POST',
-            params : {
+            method: 'GET',
+            params: {
                 action: 'preview'
             }
         },
         confirm: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'confirm'
             }
         },
         unclaimed: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'unclaimed'
+            }
+        },
+        unclaimedShares: {
+            method: 'GET',
+            params: {
+                action: 'unclaimed_shares'
+            }
+        },
+        unclaimShares: {
+            method: 'POST',
+            params: {
+                action: 'unclaim_shares'
             }
         },
         claim: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'claim'
             }
         },
         domain: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain'
             }
         },
         uri: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri'
             }
         }
@@ -235,58 +259,68 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
     return $resource(mobbrConfig.url + 'persons/:action', {}, {
         uri_earners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri_earners'
             }
         },
         uri_payers: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri_payers'
             }
         },
         domain: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain'
             }
         },
         payers: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'payers'
             }
         },
         roles: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'roles'
             }
         },
         topEarners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'top_earners'
             }
         },
         paid: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'paid'
             }
         },
         earned: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'earned'
             }
         },
         domainEarners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain_earners'
             }
+        },
+        persons: {
+            method: 'GET'
+        },
+        personsRecipients: {
+            method: 'GET',
+            params: {
+                action: 'recipients'
+            }
         }
+
     });
 });
 
@@ -369,7 +403,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
 
     try {
         mobbrSession = $injector.get('mobbrSession');
-    } catch(err) {
+    } catch (err) {
         mobbrSession = undefined;
     }
 
@@ -390,7 +424,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
     return $resource(mobbrConfig.url + 'user/:action', {}, {
         passwordLogin: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'password_login'
             },
             interceptor: {
@@ -399,7 +433,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
         },
         linkLogin: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'link_login'
             },
             interceptor: {
@@ -408,7 +442,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
         },
         updateUser: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'update_user'
             },
             interceptor: {
@@ -417,7 +451,7 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
         },
         logout: {
             method: 'DELETE',
-            params : {
+            params: {
                 action: 'logout'
             },
             interceptor: {
@@ -426,43 +460,43 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
         },
         ping: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'ping'
             }
         },
         sendLoginLink: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'send_login_link'
             }
         },
         register: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'register_user_send_login_link'
             }
         },
         updateEmail: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'update_email'
             }
         },
         confirmEmail: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'confirm_email'
             }
         },
         updatePassword: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'update_password'
             }
         },
         uploadIdentityProof: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'upload_identity_proof'
             },
             interceptor: {
@@ -471,53 +505,93 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
         },
         profileStatus: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'profile_status'
             }
         },
         currencies: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'currencies'
             }
+        },
+        deleteUser: {
+            method: 'DELETE',
+            params: {
+                action: 'user'
+            }
+        },
+        oAuthUrl: {
+            method: 'GET',
+            params: {
+                action: 'oauth_url'
+            }
+        },
+        setOauthId: {
+            method: 'GET',
+            params: {
+                action: 'oauth_id'
+            }
+        },
+        deleteUserId: {
+            method: 'DELETE',
+            params: {
+                action: 'id'
+            }
+        },
+        addEmailId: {
+            method: 'POST',
+            params: {
+                action: 'email_id'
+            }
+        },
+        confirmEmailId: {
+            method: 'PUT',
+            params: {
+                action: 'confirm_email_id'
+            }
         }
+
     });
 });
 
 angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'xpayments/:action', {}, {
-        get: {
-            method :'GET'
-        },
         info: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'info'
             }
         },
         withdraw: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'withdraw'
             }
         },
         deposit: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'deposit'
             }
         },
         supportedCurrencies: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'supported_currencies'
             }
         },
         newAccountAddress: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'new_account_address'
+            }
+        },
+        urlAddres: {
+            method: 'GET',
+            params: {
+                action: 'url_addres'
             }
         }
     });
