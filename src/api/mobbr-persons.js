@@ -3,58 +3,68 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
     return $resource(mobbrConfig.url + 'persons/:action', {}, {
         uri_earners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri_earners'
             }
         },
         uri_payers: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri_payers'
             }
         },
         domain: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain'
             }
         },
         payers: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'payers'
             }
         },
         roles: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'roles'
             }
         },
         topEarners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'top_earners'
             }
         },
         paid: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'paid'
             }
         },
         earned: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'earned'
             }
         },
         domainEarners: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain_earners'
             }
+        },
+        persons: {
+            method: 'GET'
+        },
+        personsRecipients: {
+            method: 'GET',
+            params: {
+                action: 'recipients'
+            }
         }
+
     });
 });
 
