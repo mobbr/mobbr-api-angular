@@ -54,6 +54,18 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             params : {
                 action: 'kyc_incomeranges'
             }
+        },
+        oauthProviders: {
+            method : 'GET',
+            params : {
+                action : 'oauth_providers'
+            }
+        },
+        api_connections : {
+            method : 'GET',
+            params : {
+                action : 'api_connections'
+            }
         }
     });
 });
