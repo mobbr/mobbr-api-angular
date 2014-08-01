@@ -19,10 +19,10 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
                 action: 'methods'
             }
         },
-        forexCurrencies: {
+        currencies: {
             method: 'GET',
             params : {
-                action: 'forex_currencies'
+                action: 'currencies'
             }
         },
         forexRates: {
