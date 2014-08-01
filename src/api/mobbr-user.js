@@ -151,6 +151,12 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             params: {
                 action: 'confirm_email_id'
             }
+        },
+        addOauthId: {
+            method: 'PUT',
+            params: {
+                action: 'oauth_id'
+            }
         }
 
     });
