@@ -56,19 +56,19 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
         isoLanguages: {
             method: 'GET',
             params : {
-                action: 'iso_languages'
+                action: 'languages'
             }
         },
         isoCountries: {
             method: 'GET',
             params : {
-                action: 'iso_countries'
+                action: 'countries'
             }
         },
         isoTimezones: {
             method: 'GET',
             params : {
-                action: 'iso_timezones'
+                action: 'timezones'
             }
         },
         kycIncomeRanges: {
