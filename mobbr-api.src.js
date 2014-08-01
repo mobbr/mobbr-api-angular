@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 25-07-2014 */
+/*! mobbr-api-angular 0.0.1 01-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -41,10 +41,10 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
                 action: 'methods'
             }
         },
-        forexCurrencies: {
+        currencies: {
             method: 'GET',
             params : {
-                action: 'forex_currencies'
+                action: 'currencies'
             }
         },
         forexRates: {
