@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 01-08-2014 */
+/*! mobbr-api-angular 0.0.1 08-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -177,6 +177,24 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrCon
             method: 'GET',
             params : {
                 action: 'confirmed'
+            }
+        }
+    });
+});
+
+angular.module('mobbrApi').factory('MobbrNoiifications', function ($resource, mobbrConfig) {
+
+    return $resource(mobbrConfig.url + 'notifications/:action', {}, {
+        user: {
+            method: 'GET',
+            params : {
+                action: 'user'
+            }
+        },
+        delete: {
+            method: 'DELETE',
+            params : {
+                action: 'user'
             }
         }
     });
