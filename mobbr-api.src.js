@@ -182,7 +182,7 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrCon
     });
 });
 
-angular.module('mobbrApi').factory('MobbrNoiifications', function ($resource, mobbrConfig) {
+angular.module('mobbrApi').factory('MobbrNotifications', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'notifications/:action', {}, {
         user: {
