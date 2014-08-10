@@ -1,6 +1,9 @@
 angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'xpayments/:action', {}, {
+        get: {
+            method : 'GET'
+        },
         info: {
             method: 'GET',
             params: {
