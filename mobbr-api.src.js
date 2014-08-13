@@ -299,6 +299,12 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
                 action: 'uri'
             }
         },
+        invite: {
+            method: 'GET',
+            params: {
+                action: 'invite'
+            }
+        },
         uri_earners: {
             method: 'GET',
             params: {
