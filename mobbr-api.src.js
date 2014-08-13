@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 12-08-2014 */
+/*! mobbr-api-angular 0.0.1 13-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -293,6 +293,12 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
 angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'persons/:action', {}, {
+        uri: {
+            method: 'GET',
+            params: {
+                action: 'uri'
+            }
+        },
         uri_earners: {
             method: 'GET',
             params: {
