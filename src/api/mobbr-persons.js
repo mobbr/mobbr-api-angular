@@ -7,6 +7,12 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
                 action: 'uri'
             }
         },
+        taskCandidates: {
+            method: 'GET',
+            params: {
+                action: 'task_candidates'
+            }
+        },
         invite: {
             method: 'GET',
             params: {
