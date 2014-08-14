@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 13-08-2014 */
+/*! mobbr-api-angular 0.0.1 14-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -306,7 +306,7 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
             }
         },
         invite: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'invite'
             }

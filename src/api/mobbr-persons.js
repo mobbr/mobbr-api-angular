@@ -14,7 +14,7 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
             }
         },
         invite: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'invite'
             }
