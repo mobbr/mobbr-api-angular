@@ -44,9 +44,9 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unclaimShares: {
-            method: 'POST',
+            method: 'DELETE',
             params: {
-                action: 'unclaim_shares'
+                action: 'unclaimed_shares'
             }
         },
         claim: {
