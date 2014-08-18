@@ -14,7 +14,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unpledge: {
-            method: 'POST',
+            method: 'DELETE',
             params: {
                 action: 'pledged'
             }
@@ -44,7 +44,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unclaimShares: {
-            method: 'POST',
+            method: 'DELETE',
             params: {
                 action: 'unclaimed_shares'
             }
