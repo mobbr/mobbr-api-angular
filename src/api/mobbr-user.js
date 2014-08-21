@@ -132,12 +132,18 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'PUT',
             params: {
                 action: 'oauth_id'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         deleteUserId: {
             method: 'DELETE',
             params: {
                 action: 'id'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         addEmailId: {
@@ -150,6 +156,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'PUT',
             params: {
                 action: 'confirm_email_id'
+            },
+            interceptor: {
+                response: setUser
             }
         }
 
