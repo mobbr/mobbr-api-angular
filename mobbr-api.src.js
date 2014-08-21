@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 21-08-2014 */
+/*! mobbr-api-angular 0.0.1 14-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -587,8 +587,8 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
                 action: 'oauth_url'
             }
         },
-        confirmOauthId: {
-            method: 'PUT',
+        setOauthId: {
+            method: 'GET',
             params: {
                 action: 'oauth_id'
             }
