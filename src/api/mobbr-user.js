@@ -128,8 +128,8 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
                 action: 'oauth_url'
             }
         },
-        setOauthId: {
-            method: 'GET',
+        confirmOauthId: {
+            method: 'PUT',
             params: {
                 action: 'oauth_id'
             }

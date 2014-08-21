@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 18-08-2014 */
+/*! mobbr-api-angular 0.0.1 21-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -234,9 +234,9 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unpledge: {
-            method: 'DELETE',
+            method: 'POST',
             params: {
-                action: 'pledged'
+                action: 'unpledge'
             }
         },
         preview: {
@@ -264,9 +264,9 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unclaimShares: {
-            method: 'DELETE',
+            method: 'POST',
             params: {
-                action: 'unclaimed_shares'
+                action: 'unclaim_shares'
             }
         },
         claim: {
@@ -587,8 +587,8 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
                 action: 'oauth_url'
             }
         },
-        setOauthId: {
-            method: 'GET',
+        confirmOauthId: {
+            method: 'PUT',
             params: {
                 action: 'oauth_id'
             }
