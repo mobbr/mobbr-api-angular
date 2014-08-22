@@ -20,7 +20,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         preview: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'preview'
             }
