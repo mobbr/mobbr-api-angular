@@ -14,7 +14,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unpledge: {
-            method: 'POST',
+            method: 'DELETE',
             params: {
                 action: 'unpledge'
             }
