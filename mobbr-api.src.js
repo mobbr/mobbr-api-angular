@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 22-08-2014 */
+/*! mobbr-api-angular 0.0.1 29-08-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -215,9 +215,9 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         unpledge: {
-            method: 'POST',
+            method: 'DELETE',
             params: {
-                action: 'unpledge'
+                action: 'pledged'
             }
         },
         preview: {
