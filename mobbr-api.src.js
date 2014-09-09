@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 22-08-2014 */
+/*! mobbr-api-angular 0.0.1 09-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -189,6 +189,12 @@ angular.module('mobbrApi').factory('MobbrKeywords', function ($resource, mobbrCo
             method: 'GET',
             params : {
                 action: 'domain'
+            }
+        },
+        person: {
+            method: 'GET',
+            params : {
+                action: 'person'
             }
         }
     });

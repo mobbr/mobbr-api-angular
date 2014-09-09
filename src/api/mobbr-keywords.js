@@ -12,6 +12,12 @@ angular.module('mobbrApi').factory('MobbrKeywords', function ($resource, mobbrCo
             params : {
                 action: 'domain'
             }
+        },
+        person: {
+            method: 'GET',
+            params : {
+                action: 'person'
+            }
         }
     });
 });
