@@ -66,6 +66,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             params : {
                 action : 'api_connections'
             }
+        },
+        idProviders : {
+            method : 'GET',
+            params : {
+                action : 'id_providers'
+            }
         }
     });
 });
