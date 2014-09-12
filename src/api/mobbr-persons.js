@@ -8,9 +8,12 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
             }
         },
         taskCandidates: {
+            method: 'GET'
+        },
+        info :{
             method: 'GET',
             params: {
-                action: 'task_candidates'
+                action: 'info'
             }
         },
         invite: {
