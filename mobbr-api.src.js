@@ -122,6 +122,13 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
     });
 });
 
+angular.module('mobbrApi').factory('MobbrGravatar', function ($resource) {
+
+    return $resource('https://nl.gravatar.com/:gravatarHash.json', {}, {
+
+    });
+});
+
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'invoices/:action', {}, {
