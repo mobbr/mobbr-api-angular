@@ -217,11 +217,9 @@ angular.module('mobbrApi').factory('MobbrNotifications', function ($resource, mo
 
 angular.module('mobbrApi').factory('MobbrOneName', function ($resource) {
 
-    return $resource('https://onename.io/:onenameId.json',{ callback: "JSON_CALLBACK" },
+    return $resource('https://onename.io/:onenameId.json',{  },
         {
-            get: {
-                method: 'JSONP'
-            }
+            
     });
 });
 
