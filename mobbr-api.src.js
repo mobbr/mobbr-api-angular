@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 09-09-2014 */
+/*! mobbr-api-angular 0.0.1 17-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -88,6 +88,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             params : {
                 action : 'api_connections'
             }
+        },
+        idProviders : {
+            method : 'GET',
+            params : {
+                action : 'id_providers'
+            }
         }
     });
 });
@@ -122,55 +128,24 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
     });
 });
 
+angular.module('mobbrApi').factory('MobbrGravatar', function ($resource) {
+
+    return $resource('https://nl.gravatar.com/:gravatarHash.json',{ callback: "JSON_CALLBACK" },
+        {
+            get: {
+                method: 'JSONP'
+            }
+    });
+});
+
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'invoices/:action', {}, {
-        requestable: {
+        get: {
             method: 'GET',
+            responseType: 'blob',
             params : {
                 action: 'requestable'
-            }
-        },
-        request: {
-            method: 'PUT',
-            params : {
-                action: 'request'
-            }
-        },
-        unrequest: {
-            method: 'PUT',
-            params : {
-                action: 'unrequest'
-            }
-        },
-        requested: {
-            method: 'GET',
-            params : {
-                action: 'requested'
-            }
-        },
-        confirmable: {
-            method: 'GET',
-            params : {
-                action: 'confirmable'
-            }
-        },
-        confirm: {
-            method: 'PUT',
-            params : {
-                action: 'confirm'
-            }
-        },
-        returned: {
-            method: 'GET',
-            params : {
-                action: 'returned'
-            }
-        },
-        confirmed: {
-            method: 'GET',
-            params : {
-                action: 'confirmed'
             }
         }
     });
@@ -203,6 +178,14 @@ angular.module('mobbrApi').factory('MobbrKeywords', function ($resource, mobbrCo
 angular.module('mobbrApi').factory('MobbrNotifications', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'notifications/:action', {}, {});
+});
+
+angular.module('mobbrApi').factory('MobbrOneName', function ($resource) {
+
+    return $resource('https://onename.io/:onenameId.json',{  },
+        {
+
+    });
 });
 
 angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrConfig) {
@@ -287,9 +270,12 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
             }
         },
         taskCandidates: {
+            method: 'GET'
+        },
+        info :{
             method: 'GET',
             params: {
-                action: 'task_candidates'
+                action: 'info'
             }
         },
         invite: {
