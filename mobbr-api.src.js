@@ -145,7 +145,7 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrCon
             method: 'GET',
             responseType: 'blob',
             params : {
-                action: 'requestable'
+                action: 'get'
             }
         }
     });
