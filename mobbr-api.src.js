@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 17-09-2014 */
+/*! mobbr-api-angular 0.0.1 09-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -125,11 +125,52 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'invoices/:action', {}, {
-        get: {
+        requestable: {
             method: 'GET',
-            responseType: 'blob',
             params : {
                 action: 'requestable'
+            }
+        },
+        request: {
+            method: 'PUT',
+            params : {
+                action: 'request'
+            }
+        },
+        unrequest: {
+            method: 'PUT',
+            params : {
+                action: 'unrequest'
+            }
+        },
+        requested: {
+            method: 'GET',
+            params : {
+                action: 'requested'
+            }
+        },
+        confirmable: {
+            method: 'GET',
+            params : {
+                action: 'confirmable'
+            }
+        },
+        confirm: {
+            method: 'PUT',
+            params : {
+                action: 'confirm'
+            }
+        },
+        returned: {
+            method: 'GET',
+            params : {
+                action: 'returned'
+            }
+        },
+        confirmed: {
+            method: 'GET',
+            params : {
+                action: 'confirmed'
             }
         }
     });
