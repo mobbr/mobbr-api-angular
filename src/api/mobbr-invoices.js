@@ -3,7 +3,12 @@ angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrCon
     return $resource(mobbrConfig.url + 'invoices', {}, {
         get: {
             method: 'GET',
-            responseType: 'blob'
+            responseType: 'blob',
+            interceptor: {
+                response: function (response) {
+                    return response;
+                }
+            }
         }
     });
 });
