@@ -88,6 +88,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             params : {
                 action : 'api_connections'
             }
+        },
+        idProviders : {
+            method : 'GET',
+            params : {
+                action : 'id_providers'
+            }
         }
     });
 });
@@ -119,6 +125,16 @@ angular.module('mobbrApi').factory('MobbrDomain', function ($resource, mobbrConf
                 action: 'info'
             }
         }
+    });
+});
+
+angular.module('mobbrApi').factory('MobbrGravatar', function ($resource) {
+
+    return $resource('https://nl.gravatar.com/:gravatarHash.json',{ callback: "JSON_CALLBACK" },
+        {
+            get: {
+                method: 'JSONP'
+            }
     });
 });
 
@@ -162,6 +178,14 @@ angular.module('mobbrApi').factory('MobbrKeywords', function ($resource, mobbrCo
 angular.module('mobbrApi').factory('MobbrNotifications', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'notifications/:action', {}, {});
+});
+
+angular.module('mobbrApi').factory('MobbrOneName', function ($resource) {
+
+    return $resource('https://onename.io/:onenameId.json',{  },
+        {
+
+    });
 });
 
 angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrConfig) {
@@ -246,9 +270,12 @@ angular.module('mobbrApi').factory('MobbrPerson', function ($resource, mobbrConf
             }
         },
         taskCandidates: {
+            method: 'GET'
+        },
+        info :{
             method: 'GET',
             params: {
-                action: 'task_candidates'
+                action: 'info'
             }
         },
         invite: {
