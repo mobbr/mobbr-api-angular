@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 17-09-2014 */
+/*! mobbr-api-angular 0.0.1 22-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -63,6 +63,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             method: 'GET',
             params : {
                 action: 'countries'
+            }
+        },
+        translations: {
+            method: 'GET',
+            params: {
+                action: 'translations'
             }
         },
         isoTimezones: {
