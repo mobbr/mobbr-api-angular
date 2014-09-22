@@ -43,6 +43,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
                 action: 'countries'
             }
         },
+        translations: {
+            method: 'GET',
+            params: {
+                action: 'translations'
+            }
+        },
         isoTimezones: {
             method: 'GET',
             params : {
