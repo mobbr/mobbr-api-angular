@@ -36,6 +36,18 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
             params: {
                 action: 'url_addres'
             }
+        },
+        withdrawFee: {
+            method: 'GET',
+            params: {
+                action: 'withdraw_fee'
+            }
+        },
+        depositFee: {
+            method: 'GET',
+            params: {
+                action: 'deposit_fee'
+            }
         }
     });
 });
