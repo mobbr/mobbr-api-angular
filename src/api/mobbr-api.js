@@ -1,6 +1,12 @@
 angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig) {
 
     return $resource(mobbrConfig.url + 'api/:action', {}, {
+        eventTypes: {
+            method: 'GET',
+            params: {
+                action: 'event_types'
+            }
+        },
         languages: {
             method: 'GET',
             params : {
