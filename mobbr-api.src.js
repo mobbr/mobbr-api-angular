@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 23-09-2014 */
+/*! mobbr-api-angular 0.0.1 24-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -651,13 +651,13 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
             }
         },
         withdrawFee: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'withdraw_fee'
             }
         },
         depositFee: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'deposit_fee'
             }
