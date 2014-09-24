@@ -38,13 +38,13 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
             }
         },
         withdrawFee: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'withdraw_fee'
             }
         },
         depositFee: {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'deposit_fee'
             }
