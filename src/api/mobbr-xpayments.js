@@ -22,7 +22,7 @@ angular.module('mobbrApi').factory('MobbrXPayment', function ($resource, mobbrCo
         supportedCurrencies: {
             method: 'GET',
             params: {
-                action: 'supported_currencies'
+                action: 'list_addresses'
             }
         },
         newAccountAddress: {
