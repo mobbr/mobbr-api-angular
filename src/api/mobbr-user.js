@@ -155,6 +155,12 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
                 action: 'email_id'
             }
         },
+        addPublicId: {
+            method: 'PUT',
+            params: {
+                action: 'public_id'
+            }
+        },
         confirmEmailId: {
             method: 'PUT',
             params: {
