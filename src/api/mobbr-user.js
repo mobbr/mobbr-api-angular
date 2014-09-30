@@ -87,6 +87,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'POST',
             params: {
                 action: 'confirm_email'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         updatePassword: {

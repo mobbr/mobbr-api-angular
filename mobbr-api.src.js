@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 27-09-2014 */
+/*! mobbr-api-angular 0.0.1 30-09-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -533,6 +533,9 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'POST',
             params: {
                 action: 'confirm_email'
+            },
+            interceptor: {
+                response: setUser
             }
         },
         updatePassword: {
@@ -596,12 +599,6 @@ angular.module('mobbrApi').factory('MobbrUser', function ($resource, $injector, 
             method: 'POST',
             params: {
                 action: 'email_id'
-            }
-        },
-        addPublicId: {
-            method: 'PUT',
-            params: {
-                action: 'public_id'
             }
         },
         confirmEmailId: {
