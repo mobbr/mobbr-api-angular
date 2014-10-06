@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 30-09-2014 */
+/*! mobbr-api-angular 0.0.1 06-10-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -27,6 +27,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
             method: 'GET',
             params: {
                 action: 'event_types'
+            }
+        },
+        happening: {
+            method: 'GET',
+            params: {
+                action: 'happening_right_now'
             }
         },
         languages: {

@@ -7,6 +7,12 @@ angular.module('mobbrApi').factory('MobbrApi', function ($resource, mobbrConfig)
                 action: 'event_types'
             }
         },
+        happening: {
+            method: 'GET',
+            params: {
+                action: 'happening_right_now'
+            }
+        },
         languages: {
             method: 'GET',
             params : {
