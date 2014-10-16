@@ -1,52 +1,13 @@
 angular.module('mobbrApi').factory('MobbrInvoice', function ($resource, mobbrConfig) {
 
-    return $resource(mobbrConfig.url + 'invoices/:action', {}, {
-        requestable: {
+    return $resource(mobbrConfig.url + 'invoices', {}, {
+        get: {
             method: 'GET',
-            params : {
-                action: 'requestable'
-            }
-        },
-        request: {
-            method: 'PUT',
-            params : {
-                action: 'request'
-            }
-        },
-        unrequest: {
-            method: 'PUT',
-            params : {
-                action: 'unrequest'
-            }
-        },
-        requested: {
-            method: 'GET',
-            params : {
-                action: 'requested'
-            }
-        },
-        confirmable: {
-            method: 'GET',
-            params : {
-                action: 'confirmable'
-            }
-        },
-        confirm: {
-            method: 'PUT',
-            params : {
-                action: 'confirm'
-            }
-        },
-        returned: {
-            method: 'GET',
-            params : {
-                action: 'returned'
-            }
-        },
-        confirmed: {
-            method: 'GET',
-            params : {
-                action: 'confirmed'
+            responseType: 'blob',
+            interceptor: {
+                response: function (response) {
+                    return response;
+                }
             }
         }
     });

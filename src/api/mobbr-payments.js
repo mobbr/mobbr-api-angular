@@ -3,55 +3,67 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
     return $resource(mobbrConfig.url + 'payments/:action', {}, {
         info: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'info'
             }
         },
         pledged: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'pledged'
             }
         },
         unpledge: {
-            method: 'POST',
-            params : {
-                action: 'unpledge'
+            method: 'DELETE',
+            params: {
+                action: 'pledged'
             }
         },
         preview: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'preview'
             }
         },
         confirm: {
             method: 'PUT',
-            params : {
+            params: {
                 action: 'confirm'
             }
         },
         unclaimed: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'unclaimed'
+            }
+        },
+        unclaimedShares: {
+            method: 'GET',
+            params: {
+                action: 'unclaimed_shares'
+            }
+        },
+        unclaimShares: {
+            method: 'DELETE',
+            params: {
+                action: 'unclaimed_shares'
             }
         },
         claim: {
             method: 'POST',
-            params : {
+            params: {
                 action: 'claim'
             }
         },
         domain: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'domain'
             }
         },
         uri: {
             method: 'GET',
-            params : {
+            params: {
                 action: 'uri'
             }
         }

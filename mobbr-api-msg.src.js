@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 13-06-2014 */
+/*! mobbr-api-angular 0.0.1 16-10-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -37,14 +37,14 @@ angular.module('mobbrMsg').factory('mobbrMsgInterceptor', function ($q, mobbrCon
 
     return {
         response: function (response) {
-            if (mobbrConfig.isApiUrl(response.config.url) && response.data.message) {
+            if (mobbrConfig.isApiUrl(response.config.url) && response.data && response.data.message) {
                 mobbrMsg.add({ msg: response.data.message.text });
             }
             return response;
         },
         responseError: function (rejection) {
 
-            if (rejection.config && mobbrConfig.isApiUrl(rejection.config.url) && rejection.data.message) {
+            if (rejection.config && mobbrConfig.isApiUrl(rejection.config.url) && rejection.data && rejection.data.message) {
                 mobbrMsg.add({ type: 'danger', msg: rejection.data.message.text });
             }
 
