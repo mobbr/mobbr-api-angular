@@ -1,4 +1,4 @@
-/*! mobbr-api-angular 0.0.1 16-10-2014 */
+/*! mobbr-api-angular 0.0.1 17-10-2014 */
 (function (angular, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['angular'], function(angular) {
@@ -260,7 +260,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         claim: {
-            method: 'POST',
+            method: 'PUT',
             params: {
                 action: 'claim'
             }
