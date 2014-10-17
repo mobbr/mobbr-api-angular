@@ -50,7 +50,7 @@ angular.module('mobbrApi').factory('MobbrPayment', function ($resource, mobbrCon
             }
         },
         claim: {
-            method: 'POST',
+            method: 'PUT',
             params: {
                 action: 'claim'
             }
